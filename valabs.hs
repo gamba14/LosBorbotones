@@ -1,0 +1,1 @@
+valAbs num = abs(num)

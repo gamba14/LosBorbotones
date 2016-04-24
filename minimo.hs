@@ -1,0 +1,1 @@
+esMinimo n1 n2 = min (n1 n2)
