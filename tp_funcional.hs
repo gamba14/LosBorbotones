@@ -1,20 +1,23 @@
 import Data.List
 import Data.Char
+
 data Archivo = Archivo {nombre :: String , contenido :: String} deriving (Show, Eq)
 
 unTpGrupal :: Archivo
 
 unTpGrupal = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola " 
 
-tamanioArchivo archivo = length(contenido archivo)*8 
+tamanioArchivo archivo = length (contenido archivo) * 8 
 
-esVacio archivo = length(contenido archivo) == 0
+esVacio archivo = length (contenido archivo) == 0
 
-cantLineas archivo = length(lines(contenido archivo))
+cantLineas archivo = length (lines (contenido archivo))
 
---esLineaEnBlanco archivo =  
+esLineaEnBlanco linea = all isSpace linea
 
-esHs archivo = drop (length(nombre archivo)-3) (nombre archivo) == ".hs"
+algunaLineaEnBlanco archivo = any esLineaEnBlanco (lines (contenido archivo))
+
+esHs archivo = drop (length (nombre archivo) - 3) (nombre archivo) == ".hs"
 
 renombrarArchivo archivo nuevo = Archivo nuevo (contenido archivo) 
 
