@@ -54,3 +54,15 @@ agregarLinea archivo posicion linea =
 
         in anterior ++ linea ++ "\n" ++ posterior
     )
+
+
+quitarLinea :: Archivo -> Int -> Archivo
+
+quitarLinea archivo posicion = 
+    Archivo 
+    (nombre archivo) 
+    (
+        let anterior  =  unlines (take (posicion - 1) (lines (contenido archivo))) 
+            posterior =  unlines (drop (posicion    ) (lines (contenido archivo))) 
+        in anterior ++ posterior
+    )
