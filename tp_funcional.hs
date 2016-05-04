@@ -42,3 +42,15 @@ renombrarArchivo :: Archivo -> String -> Archivo
 
 renombrarArchivo archivo nuevo = Archivo nuevo (contenido archivo) 
 
+
+agregarLinea :: Archivo -> Int -> String -> Archivo
+
+agregarLinea archivo posicion linea = 
+    Archivo 
+    (nombre archivo) 
+    (
+        let anterior  =  unlines (take (posicion - 1) (lines (contenido archivo))) 
+            posterior =  unlines (drop (posicion - 1) (lines (contenido archivo))) 
+
+        in anterior ++ linea ++ "\n" ++ posterior
+    )
