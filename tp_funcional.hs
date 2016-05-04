@@ -66,3 +66,16 @@ quitarLinea archivo posicion =
             posterior =  unlines (drop (posicion    ) (lines (contenido archivo))) 
         in anterior ++ posterior
     )
+
+reemplazarLinea :: Archivo -> Int -> String -> Archivo
+
+reemplazarLinea archivo posicion nuevalinea = 
+    Archivo 
+    (nombre archivo) 
+    (
+        let anterior  =  unlines (take (posicion - 1) (lines (contenido archivo))) 
+            posterior =  unlines (drop (posicion    ) (lines (contenido archivo))) 
+
+        in anterior ++ nuevalinea ++ "\n" ++ posterior
+    )
+
