@@ -1,5 +1,6 @@
 import Data.List
 import Data.Char
+import Data.String
 
 data Archivo = Archivo {nombre :: String , contenido :: String} deriving (Show, Eq)
 
@@ -111,5 +112,11 @@ esModificacionInutil :: Archivo -> Modificacion -> Bool
 esModificacionInutil archivo modificacion = 
     ((contenido archivoModificado) == (contenido archivo)) && ((nombre archivoModificado) == (nombre archivo) ) 
     where archivoModificado = modificacion archivo
-    
 
+
+reemplazarSiCoincide buscada porReemplazar palabra | buscada == palabra = porReemplazar
+                                                   | otherwise = palabra
+
+buscarYReemplazar archivo buscada porReemplazar = 
+    Archivo (nombre archivo )
+    (unwords(map (reemplazarSiCoincide buscada porReemplazar) (words(contenido archivo)))) 
