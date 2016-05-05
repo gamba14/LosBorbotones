@@ -79,7 +79,7 @@ reemplazarLinea archivo posicion nuevalinea =
         in anterior ++ nuevalinea ++ "\n" ++ posterior
     )
 
-wrappearLinea :: String -> String
+wrappearLineaAux :: String -> String -> String
 
 wrappearLineaAux wrappeadas porWrappear 
     | (length porWrappear) >= 80 = 
@@ -90,10 +90,18 @@ wrappearLineaAux wrappeadas porWrappear
         )
     | otherwise = wrappeadas ++ porWrappear
 
+
+wrappearLinea :: String -> String
+
 wrappearLinea linea = wrappearLineaAux "" linea
+
     
+wrappearArchivo :: Archivo -> Archivo
 
-
+wrappearArchivo archivo = 
+    Archivo
+    (nombre archivo)
+    (unlines (map wrappearLinea (lines (contenido archivo))))
         
 -- esModificacionInutil archivo = 
     
