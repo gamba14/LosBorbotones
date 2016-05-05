@@ -45,7 +45,7 @@ renombrarArchivo archivo nuevo = Archivo nuevo (contenido archivo)
 
 agregarLinea :: Archivo -> Int -> String -> Archivo
 
-agregarLinea archivo posicion linea = 
+agregarLinea archivo posicion linea =
     Archivo 
     (nombre archivo) 
     (
@@ -78,4 +78,23 @@ reemplazarLinea archivo posicion nuevalinea =
 
         in anterior ++ nuevalinea ++ "\n" ++ posterior
     )
+
+wrappearLinea :: String -> String
+
+wrappearLineaAux wrappeadas porWrappear 
+    | (length porWrappear) >= 80 = 
+        (
+            let anterior  = take 80 porWrappear
+                posterior = drop 80 porWrappear
+            in  wrappearLineaAux (wrappeadas ++ anterior ++ "\n") posterior
+        )
+    | otherwise = wrappeadas ++ porWrappear
+
+wrappearLinea linea = wrappearLineaAux "" linea
+    
+
+
+        
+-- esModificacionInutil archivo = 
+    
 
