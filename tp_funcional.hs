@@ -89,7 +89,7 @@ wrappearLineaAux wrappeadas porWrappear
             in  wrappearLineaAux (wrappeadas ++ anterior ++ "\n") posterior
         )
     | otherwise = wrappeadas ++ porWrappear
-
+-- FIXME: Agrega un salto de linea aunque no cambie nada (bug?)
 
 wrappearLinea :: String -> String
 
@@ -103,6 +103,13 @@ wrappearArchivo archivo =
     (nombre archivo)
     (unlines (map wrappearLinea (lines (contenido archivo))))
         
--- esModificacionInutil archivo = 
+
+type Modificacion = Archivo -> Archivo
+
+esModificacionInutil :: Archivo -> Modificacion -> Bool
+
+esModificacionInutil archivo modificacion = 
+    ((contenido archivoModificado) == (contenido archivo)) && ((nombre archivoModificado) == (nombre archivo) ) 
+    where archivoModificado = modificacion archivo
     
 
