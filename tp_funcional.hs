@@ -109,8 +109,7 @@ type Modificacion = Archivo -> Archivo
 
 esModificacionInutil :: Archivo -> Modificacion -> Bool
 
-esModificacionInutil archivo modificacion = 
-    ((contenido archivoModificado) == (contenido archivo)) && ((nombre archivoModificado) == (nombre archivo) ) 
+esModificacionInutil archivo modificacion = archivoModificado == archivo
     where archivoModificado = modificacion archivo
 
 
