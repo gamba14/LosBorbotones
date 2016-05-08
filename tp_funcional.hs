@@ -4,6 +4,9 @@ import Data.String
 
 data Archivo = Archivo {nombre :: String , contenido :: String} deriving (Show, Eq)
 
+type Modificacion = Archivo -> Archivo
+
+
 unTpGrupal :: Archivo
 
 unTpGrupal = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola " 
@@ -104,8 +107,6 @@ wrappearArchivo archivo =
     (nombre archivo)
     (unlines (map wrappearLinea (lines (contenido archivo))))
         
-
-type Modificacion = Archivo -> Archivo
 
 esModificacionInutil :: Archivo -> Modificacion -> Bool
 
