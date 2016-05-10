@@ -114,9 +114,21 @@ esModificacionInutil archivo modificacion = archivoModificado == archivo
     where archivoModificado = modificacion archivo
 
 
+reemplazarSiCoincide :: String -> String -> String -> String
+
 reemplazarSiCoincide buscada porReemplazar palabra | buscada == palabra = porReemplazar
                                                    | otherwise = palabra
 
+
+buscarEnLineaYRemplazar :: String -> String -> String -> String
+
+-- FIXME: elimina los espacios adionales
+buscarEnLineaYRemplazar buscada porReemplazar linea = unwords(map (reemplazarSiCoincide buscada porReemplazar) (words(linea)))
+
+
+buscarYReemplazar :: Archivo -> String -> String -> Archivo
+
 buscarYReemplazar archivo buscada porReemplazar = 
-    Archivo (nombre archivo )
-    (unwords(map (reemplazarSiCoincide buscada porReemplazar) (words(contenido archivo)))) 
+    Archivo (nombre archivo)
+    (unlines (map (buscarEnLineaYRemplazar buscada porReemplazar) (lines (contenido archivo)) ))
+
