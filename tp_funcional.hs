@@ -138,10 +138,10 @@ agregarLinea archivo posicion linea =
     Archivo 
     (nombre archivo) 
     (
-        let anterior  =  unlines (take (posicion - 1) (lines (contenido archivo))) 
-            posterior =  unlines (drop (posicion - 1) (lines (contenido archivo))) 
+        let anterior  =  deslinear (take (posicion - 1) (lineas (contenido archivo))) 
+            posterior =  deslinear (drop (posicion - 1) (lineas (contenido archivo)))  
 
-        in anterior ++ linea ++ "\n" ++ posterior
+        in anterior ++ (lineaSegura linea) ++ posterior
     )
 
 
@@ -151,8 +151,8 @@ quitarLinea archivo posicion =
     Archivo 
     (nombre archivo) 
     (
-        let anterior  =  unlines (take (posicion - 1) (lines (contenido archivo))) 
-            posterior =  unlines (drop (posicion    ) (lines (contenido archivo))) 
+        let anterior  =  deslinear (take (posicion - 1) (lineas (contenido archivo))) 
+            posterior =  deslinear (drop (posicion    ) (lineas (contenido archivo))) 
         in anterior ++ posterior
     )
 
@@ -162,10 +162,10 @@ reemplazarLinea archivo posicion nuevalinea =
     Archivo 
     (nombre archivo) 
     (
-        let anterior  =  unlines (take (posicion - 1) (lines (contenido archivo))) 
-            posterior =  unlines (drop (posicion    ) (lines (contenido archivo))) 
+        let anterior  =  deslinear (take (posicion - 1) (lineas (contenido archivo))) 
+            posterior =  deslinear (drop (posicion    ) (lineas (contenido archivo))) 
 
-        in anterior ++ nuevalinea ++ "\n" ++ posterior
+        in anterior ++ (lineaSegura nuevalinea) ++ posterior
     )
 
 wrappearLineaAux :: String -> String -> String
@@ -178,7 +178,6 @@ wrappearLineaAux wrappeadas porWrappear
             in  wrappearLineaAux (wrappeadas ++ anterior ++ "\n") posterior
         )
     | otherwise = wrappeadas ++ porWrappear
--- FIXME: Agrega un salto de linea aunque no cambie nada (bug?)
 
 wrappearLinea :: String -> String
 
@@ -190,7 +189,7 @@ wrappearArchivo :: Archivo -> Archivo
 wrappearArchivo archivo = 
     Archivo
     (nombre archivo)
-    (unlines (map wrappearLinea (lines (contenido archivo))))
+    (deslinear (map wrappearLinea (lineas (contenido archivo))))
         
 
 esModificacionInutil :: Archivo -> Modificacion -> Bool
@@ -207,8 +206,7 @@ reemplazarSiCoincide buscada porReemplazar palabra | buscada == palabra = porRee
 
 buscarEnLineaYRemplazar :: String -> String -> String -> String
 
--- FIXME: elimina los espacios adionales
-buscarEnLineaYRemplazar buscada porReemplazar linea = unwords(map (reemplazarSiCoincide buscada porReemplazar) (words(linea)))
+buscarEnLineaYRemplazar buscada porReemplazar linea = unirSimbolos(map (reemplazarSiCoincide buscada porReemplazar) (dividirSimbolos linea))
 
 
 buscarYReemplazar :: Archivo -> String -> String -> Archivo
