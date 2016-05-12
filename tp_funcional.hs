@@ -131,14 +131,14 @@ esHs :: Archivo -> Bool
 esHs archivo = drop (length (nombre archivo) - 3) (nombre archivo) == ".hs"
 
 
-renombrarArchivo :: Archivo -> String -> Archivo
+renombrarArchivo ::  String -> Archivo -> Archivo
 
-renombrarArchivo archivo nuevo = Archivo nuevo (contenido archivo) 
+renombrarArchivo nuevoNombre archivo = Archivo nuevoNombre (contenido archivo) 
 
+-- Agregar linea (texto) desde de (n) en (archivo)
+agregarLinea :: String -> Int -> Archivo -> Archivo
 
-agregarLinea :: Archivo -> Int -> String -> Archivo
-
-agregarLinea archivo posicion linea =
+agregarLinea linea posicion archivo=
     Archivo 
     (nombre archivo) 
     (
@@ -148,10 +148,10 @@ agregarLinea archivo posicion linea =
         in anterior ++ (lineaSegura linea) ++ posterior
     )
 
+-- Quitar linea (n) en Archivo
+quitarLinea :: Int -> Archivo -> Archivo
 
-quitarLinea :: Archivo -> Int -> Archivo
-
-quitarLinea archivo posicion = 
+quitarLinea posicion archivo = 
     Archivo 
     (nombre archivo) 
     (
@@ -160,9 +160,10 @@ quitarLinea archivo posicion =
         in anterior ++ posterior
     )
 
-reemplazarLinea :: Archivo -> Int -> String -> Archivo
+-- Reemplazar linea (n) por (texto) en (archivo)
+reemplazarLinea :: Int -> String -> Archivo -> Archivo
 
-reemplazarLinea archivo posicion nuevalinea = 
+reemplazarLinea posicion nuevalinea archivo =  
     Archivo 
     (nombre archivo) 
     (
@@ -171,6 +172,8 @@ reemplazarLinea archivo posicion nuevalinea =
 
         in anterior ++ (lineaSegura nuevalinea) ++ posterior
     )
+
+
 
 wrappearLineaAux :: String -> String -> String
 
@@ -182,6 +185,7 @@ wrappearLineaAux wrappeadas porWrappear
             in  wrappearLineaAux (wrappeadas ++ anterior ++ "\n") posterior
         )
     | otherwise = wrappeadas ++ porWrappear
+
 
 wrappearLinea :: String -> String
 
@@ -196,9 +200,9 @@ wrappearArchivo archivo =
     (deslinear (map wrappearLinea (lineas (contenido archivo))))
         
 
-esModificacionInutil :: Archivo -> Modificacion -> Bool
+esModificacionInutil :: Modificacion -> Archivo -> Bool
 
-esModificacionInutil archivo modificacion = archivoModificado == archivo
+esModificacionInutil modificacion archivo = archivoModificado == archivo
     where archivoModificado = modificacion archivo
 
 
@@ -213,9 +217,9 @@ buscarEnLineaYRemplazar :: String -> String -> String -> String
 buscarEnLineaYRemplazar buscada porReemplazar linea = unirSimbolos(map (reemplazarSiCoincide buscada porReemplazar) (dividirSimbolos linea))
 
 
-buscarYReemplazar :: Archivo -> String -> String -> Archivo
+buscarYReemplazar :: String -> String -> Archivo -> Archivo
 
-buscarYReemplazar archivo buscada porReemplazar = 
+buscarYReemplazar buscada porReemplazar archivo = 
     Archivo (nombre archivo)
     (unlines (map (buscarEnLineaYRemplazar buscada porReemplazar) (lines (contenido archivo)) ))
 
