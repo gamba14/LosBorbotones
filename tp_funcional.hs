@@ -11,6 +11,10 @@ unTpGrupal :: Archivo
 
 unTpGrupal = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola " 
 
+lineasLargas = Archivo 
+                "lineasLargas.txt" 
+                "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\n12345678901234567890" 
+
 -- Funciones Utiles
 
 -- Auxiliar de dividir Simbolos
