@@ -1,5 +1,6 @@
 module HIT
 (
+    Archivo(..),
     tamanioArchivo,
     esVacio,
     cantLineas,
