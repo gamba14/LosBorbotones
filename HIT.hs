@@ -75,14 +75,16 @@ renombrarArchivo nuevoNombre archivo = Archivo nuevoNombre (contenido archivo)
 -- Agregar linea (texto) desde de (n) en (archivo)
 agregarLinea :: String -> Int -> Archivo -> Archivo
 
-agregarLinea linea posicion archivo=
+agregarLinea linea posicion archivo =
     Archivo 
     (nombre archivo) 
     (
         let anterior  =  lineaAnterior   posicion      (contenido archivo)
             posterior =  lineaPosterior (posicion - 1) (contenido archivo) 
 
-        in anterior ++ (lineaSegura linea) ++ posterior
+        in case anterior of 
+            []       ->                           (lineaSegura linea) ++ posterior
+            anterior -> (lineaSegura anterior) ++ (lineaSegura linea) ++ posterior
     )
 
 -- Quitar linea (n) en Archivo
