@@ -109,7 +109,9 @@ reemplazarLinea posicion nuevalinea archivo =
         let anterior  =  lineaAnterior  posicion (contenido archivo) 
             posterior =  lineaPosterior posicion (contenido archivo)
 
-        in anterior ++ (lineaSegura nuevalinea) ++ posterior
+        in case anterior of 
+            []       ->                           (lineaSegura nuevalinea) ++ posterior
+            anterior -> (lineaSegura anterior) ++ (lineaSegura nuevalinea) ++ posterior
     )
 
 
