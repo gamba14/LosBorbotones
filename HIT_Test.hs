@@ -100,6 +100,27 @@ tablasDePrueba =
                 ["tpGrupal - version 5 final final 2 (para entregar).hs", show unTpGrupal]
                 (Archivo "tpGrupal - version 5 final final 2 (para entregar).hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola ")
                 (renombrarArchivo "tpGrupal - version 5 final final 2 (para entregar).hs" unTpGrupal) 
+        ),
+        (
+            generarTest
+                "Prueba para agregarLinea (1 de ?)"
+                ["Whose Line Is It Anyway?", show 2, show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \nWhose Line Is It Anyway?\n listaLarga = (>9) . length \n    \n hola ")
+                (agregarLinea "Whose Line Is It Anyway?" 2 unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para agregarLinea (2 de ?)"
+                ["Whose Line Is It Anyway?", show 5, show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola \nWhose Line Is It Anyway?\n")
+                (agregarLinea "Whose Line Is It Anyway?" 5 unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para agregarLinea (3 de ?)"
+                ["Whose Line Is It Anyway?", show 1, show unTpGrupal]
+                (Archivo "tpGrupal.hs" "Whose Line Is It Anyway?\nlistaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola ")
+                (agregarLinea "Whose Line Is It Anyway?" 1 unTpGrupal)
         )
 
     ] -- TODO: Agregar Pruebas
