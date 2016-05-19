@@ -32,7 +32,7 @@ generarTest descripcion parametros esperado funcionAplicada =
 generarMensaje :: Test -> String
 
 generarMensaje test =
-    "\t" ++ descripcion test ++ ":\t\t" ++ 
+    "\t" ++ descripcion test ++ ":\t" ++ 
         case resultado test of   
             True  ->"Paso\n"
 
