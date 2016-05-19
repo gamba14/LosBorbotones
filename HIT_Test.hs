@@ -188,6 +188,43 @@ tablasDePrueba =
                 [show (-1), "Keep yourself alive", show unTpGrupal]
                 (Archivo "tpGrupal.hs" "Keep yourself alive\nlistaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola " )
                 (reemplazarLinea (-1) "Keep yourself alive" unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para wrappearArchivo (1 de 4)"
+                [show lineasLargas]
+                (Archivo 
+                    "lineasLargas.txt" 
+                    "12345678901234567890123456789012345678901234567890123456789012345678901234567890\n1234567890\n12345678901234567890"
+                )
+                (wrappearArchivo lineasLargas)
+        ),
+        (
+            generarTest
+                "Prueba para wrappearArchivo (2 de 4)"
+                [show archivoPolemico]
+                (Archivo 
+                    "Este archivo no contiene nada que pueda ofender al lector.txt"
+                    ""
+                )
+                (wrappearArchivo archivoPolemico)
+        ),
+        (
+            generarTest
+                "Prueba para wrappearArchivo (3 de 4)"
+                [show apuntesDeLamateria]
+                (Archivo 
+                    "Apuntes de la materia.txt" 
+                    "Declarar el tipo de una funcion\n\tf :: tipo_del_parametro_1 ->  tipo_del_parametro_2 ->  tipo_de_la_imagen_de_f\n..."
+                )
+                (wrappearArchivo apuntesDeLamateria)
+        ),
+        (
+            generarTest
+                "Prueba para wrappearArchivo (4 de 4)"
+                [show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola ")
+                (wrappearArchivo unTpGrupal)
         )
 
 
