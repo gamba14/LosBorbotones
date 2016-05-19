@@ -79,8 +79,8 @@ agregarLinea linea posicion archivo=
     Archivo 
     (nombre archivo) 
     (
-        let anterior  =  deslinear (take (posicion - 1) (lineas (contenido archivo))) 
-            posterior =  deslinear (drop (posicion - 1) (lineas (contenido archivo)))  
+        let anterior  =  lineaAnterior   posicion      (contenido archivo)
+            posterior =  lineaPosterior (posicion - 1) (contenido archivo) 
 
         in anterior ++ (lineaSegura linea) ++ posterior
     )
@@ -92,8 +92,8 @@ quitarLinea posicion archivo =
     Archivo 
     (nombre archivo) 
     (
-        let anterior  =  deslinear (take (posicion - 1) (lineas (contenido archivo))) 
-            posterior =  deslinear (drop (posicion    ) (lineas (contenido archivo))) 
+        let anterior  =  lineaAnterior  posicion (contenido archivo) 
+            posterior =  lineaPosterior posicion (contenido archivo)
         in anterior ++ posterior
     )
 
@@ -104,8 +104,8 @@ reemplazarLinea posicion nuevalinea archivo =
     Archivo 
     (nombre archivo) 
     (
-        let anterior  =  deslinear (take (posicion - 1) (lineas (contenido archivo))) 
-            posterior =  deslinear (drop (posicion    ) (lineas (contenido archivo))) 
+        let anterior  =  lineaAnterior  posicion (contenido archivo) 
+            posterior =  lineaPosterior posicion (contenido archivo)
 
         in anterior ++ (lineaSegura nuevalinea) ++ posterior
     )

@@ -4,7 +4,10 @@ module StringsAux
     unirSimbolos,
     lineas, 
     deslinear,
-    lineaSegura
+    lineaSegura,
+    lineaAnterior,
+    lineaPosterior,
+    lineaNumero
 )
 where
 
@@ -86,6 +89,41 @@ deslinear lineas = foldr (++) "" lineas
 -- "Linea Segura" o "Asegurame que sea una linea", chistonto ;D
 lineaSegura :: String -> String
 
+lineaSegura [] = "\n"
+
 lineaSegura texto 
     | (last texto) == '\n' = texto
-    | otherwise = texto ++ "\n"
+    | otherwise            = texto ++ "\n"
+
+
+-- Dado un texto devuelve todo lo anterior a cierto numero de linea
+lineaAnterior :: Int -> String -> String
+
+lineaAnterior _ [] = ""
+
+lineaAnterior numeroLinea texto
+    | numeroLinea <= 1 = ""
+    | otherwise        = deslinear (take (numeroLinea - 1) (lineas texto))
+
+
+-- Dado un texto devuelve lo posterior a cierto numero de linea
+lineaPosterior :: Int -> String -> String
+
+lineaPosterior _ [] = ""
+
+lineaPosterior numeroLinea texto 
+    | numeroLinea <= 0 = texto
+    | otherwise        = deslinear (drop numeroLinea (lineas texto)) 
+
+
+-- Dado un texto devuelve cierta linea
+-- hecho de puro visio
+lineaNumero :: Int -> String -> String
+
+lineaNumero _ [] = ""
+
+lineaNumero m texto 
+    | m <= 0                = ""
+    | (length lineadas) < m = ""
+    | otherwise             = lineadas !! (m - 1)
+    where lineadas = lineas texto

@@ -62,17 +62,108 @@ tablasDePrueba =
         ),
         (
             generarTest
-                "Prueba para lineaSegura (1 de 2)"
+                "Prueba para lineaSegura (1 de 3)"
                 ["linea sin line feed"]
                 "linea sin line feed\n"
                 (lineaSegura "linea sin line feed")
         ),
         (
             generarTest
-                "Prueba para lineaSegura (2 de 2)"
+                "Prueba para lineaSegura (2 de 3)"
                 ["linea con line feed\n"]
                 "linea con line feed\n"
                 (lineaSegura "linea con line feed\n")
+        ),
+        (
+            generarTest
+                "Prueba para lineaSegura (3 de 3)"
+                [""]
+                "\n"
+                (lineaSegura "")
+        ),
+        (
+            generarTest
+                "Prueba para lineaAnterior (1 de 4)"
+                [show 2, ""]
+                ""
+                (lineaAnterior 2 "")
+        ),
+        (
+            generarTest
+                "Prueba para lineaAnterior (2 de 4)"
+                [show 2, "1\n2\n3"]
+                "1\n"
+                (lineaAnterior 2 "1\n2\n3")
+        ),
+        (
+            generarTest
+                "Prueba para lineaAnterior (3 de 4)"
+                [show 6, "1\n2\n3"]
+                "1\n2\n3"
+                (lineaAnterior 6 "1\n2\n3")
+        ),
+        (
+            generarTest
+                "Prueba para lineaAnterior (4 de 4)"
+                [show (-1), "1\n2\n3"]
+                ""
+                (lineaAnterior (-1) "1\n2\n3")
+        ),
+        (
+            generarTest
+                "Prueba para lineaPosterior (1 de 4)"
+                [show 2, ""]
+                ""
+                (lineaPosterior 2 "")
+        ),
+        (
+            generarTest
+                "Prueba para lineaPosterior (2 de 4)"
+                [show 2, "1\n2\n3"]
+                "3"
+                (lineaPosterior 2 "1\n2\n3")
+        ),
+        (
+            generarTest
+                "Prueba para lineaPosterior (3 de 4)"
+                [show 6, "1\n2\n3"]
+                ""
+                (lineaPosterior 6 "1\n2\n3")
+        ),
+        (
+            generarTest
+                "Prueba para lineaPosterior (4 de 4)"
+                [show (-1), "1\n2\n3"]
+                "1\n2\n3"
+                (lineaPosterior (-1) "1\n2\n3")
+        ),
+        (
+            generarTest
+                "Prueba para lineaNumero (1 de 4)"
+                [show 2, ""]
+                ""
+                (lineaNumero 2 "")
+        ),
+        (
+            generarTest
+                "Prueba para lineaNumero (2 de 4)"
+                [show 2, "1\n2\n3"]
+                "2\n"
+                (lineaNumero 2 "1\n2\n3")
+        ),
+        (
+            generarTest
+                "Prueba para lineaNumero (3 de 4)"
+                [show 6, "1\n2\n3"]
+                ""
+                (lineaNumero 6 "1\n2\n3")
+        ),
+        (
+            generarTest
+                "Prueba para lineaNumero (4 de 4)"
+                [show (-1), "1\n2\n3"]
+                ""
+                (lineaNumero (-1) "1\n2\n3")
         )
     ]
 
