@@ -103,25 +103,90 @@ tablasDePrueba =
         ),
         (
             generarTest
-                "Prueba para agregarLinea (1 de ?)"
+                "Prueba para agregarLinea (1 de 4)"
                 ["Whose Line Is It Anyway?", show 2, show unTpGrupal]
                 (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \nWhose Line Is It Anyway?\n listaLarga = (>9) . length \n    \n hola ")
                 (agregarLinea "Whose Line Is It Anyway?" 2 unTpGrupal)
         ),
         (
             generarTest
-                "Prueba para agregarLinea (2 de ?)"
+                "Prueba para agregarLinea (2 de 4)"
                 ["Whose Line Is It Anyway?", show 5, show unTpGrupal]
                 (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola \nWhose Line Is It Anyway?\n")
                 (agregarLinea "Whose Line Is It Anyway?" 5 unTpGrupal)
         ),
         (
             generarTest
-                "Prueba para agregarLinea (3 de ?)"
+                "Prueba para agregarLinea (3 de 4)"
                 ["Whose Line Is It Anyway?", show 1, show unTpGrupal]
                 (Archivo "tpGrupal.hs" "Whose Line Is It Anyway?\nlistaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola ")
                 (agregarLinea "Whose Line Is It Anyway?" 1 unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para agregarLinea (4 de 4)"
+                ["Whose Line Is It Anyway?", show (-1), show unTpGrupal]
+                (Archivo "tpGrupal.hs" "Whose Line Is It Anyway?\nlistaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola ")
+                (agregarLinea "Whose Line Is It Anyway?" (-1) unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para quitarLinea (1 de 4)"
+                [show 3, show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n hola " )
+                (quitarLinea 3 unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para quitarLinea (2 de 4)"
+                [show 4, show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n" )
+                (quitarLinea 4 unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para quitarLinea (3 de 4)"
+                [show 5, show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola " )
+                (quitarLinea 5 unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para quitarLinea (4 de 4)"
+                [show (-1), show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola " )
+                (quitarLinea (-1) unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para reemplazarLinea (1 de 4)"
+                [show 3, "Keep yourself alive", show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \nKeep yourself alive\n hola " )
+                (reemplazarLinea 3 "Keep yourself alive" unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para reemplazarLinea (2 de 4)"
+                [show 3, "Keep yourself alive \n", show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \nKeep yourself alive \n hola " )
+                (reemplazarLinea 3 "Keep yourself alive \n" unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para reemplazarLinea (3 de 4)"
+                [show 7, "Keep yourself alive", show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola \nKeep yourself alive\n" )
+                (reemplazarLinea 7 "Keep yourself alive" unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para reemplazarLinea (4 de 4)"
+                [show (-1), "Keep yourself alive", show unTpGrupal]
+                (Archivo "tpGrupal.hs" "Keep yourself alive\nlistaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola " )
+                (reemplazarLinea (-1) "Keep yourself alive" unTpGrupal)
         )
+
+
 
     ] -- TODO: Agregar Pruebas
 
