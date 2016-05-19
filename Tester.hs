@@ -8,7 +8,7 @@ where
 
 
 data Test = Test {
-    nombre      :: String,
+    descripcion :: String,
     parametros  :: [String],
     esperado    :: String,
     obtenido    :: String,
@@ -19,9 +19,9 @@ data Test = Test {
 -- Genera una prueba (test)
 generarTest :: (Show r, Eq r) => String -> [String] -> r -> r -> Test
 
-generarTest nombre parametros esperado funcionAplicada = 
+generarTest descripcion parametros esperado funcionAplicada = 
     Test
-        nombre
+        descripcion
         parametros
         (show esperado)
         (show funcionAplicada)
@@ -32,7 +32,7 @@ generarTest nombre parametros esperado funcionAplicada =
 generarMensaje :: Test -> String
 
 generarMensaje test =
-    "\tPrueba para " ++ nombre test ++ ":\t\t\t" ++ 
+    "\t" ++ descripcion test ++ ":\t\t" ++ 
         case resultado test of   
             True  ->"Paso\n"
 
