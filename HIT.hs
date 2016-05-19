@@ -4,7 +4,6 @@ module HIT
     tamanioArchivo,
     esVacio,
     cantLineas,
-    esLineaEnBlanco,
     algunaLineaEnBlanco,
     esHs,
     renombrarArchivo, 
