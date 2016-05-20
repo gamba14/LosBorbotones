@@ -12,7 +12,7 @@ module HIT
     reemplazarLinea,
     wrappearArchivo,
     esModificacionInutil,
-    buscarYReemplazar
+    buscarYReemplazarPalabra
 )
 where
 
@@ -158,9 +158,9 @@ buscarEnLineaYRemplazar :: String -> String -> String -> String
 buscarEnLineaYRemplazar buscada porReemplazar linea = unirSimbolos(map (reemplazarSiCoincide buscada porReemplazar) (dividirSimbolos linea))
 
 
-buscarYReemplazar :: String -> String -> Archivo -> Archivo
+buscarYReemplazarPalabra :: String -> String -> Archivo -> Archivo
 
-buscarYReemplazar buscada porReemplazar archivo = 
+buscarYReemplazarPalabra buscada porReemplazar archivo = 
     Archivo (nombre archivo)
     (unlines (map (buscarEnLineaYRemplazar buscada porReemplazar) (lines (contenido archivo)) ))
 

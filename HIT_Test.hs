@@ -219,8 +219,42 @@ tablasDePrueba =
                 [show unTpGrupal]
                 unTpGrupal
                 (wrappearArchivo unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para esModificacionInutil (1 de 3)"
+                ["wrappearArchivo", show unTpGrupal]
+                True
+                (esModificacionInutil wrappearArchivo unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para esModificacionInutil (2 de 3)"
+                ["wrappearArchivo", show lineasLargas]
+                False
+                (esModificacionInutil wrappearArchivo lineasLargas)
+        ),
+        (
+            generarTest
+                "Prueba para esModificacionInutil (3 de 3)"
+                ["quitarLinea (-1) ", show unTpGrupal]
+                True
+                (esModificacionInutil (quitarLinea (-1)) unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para buscarYReemplazarPalabra (1 de 2)"
+                ["hola", "mundo", show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n mundo ")
+                (buscarYReemplazarPalabra "hola" "mundo" unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para buscarYReemplazarPalabra (2 de 2)"
+                ["nada", "todo", show unTpGrupal]
+                unTpGrupal
+                (buscarYReemplazarPalabra "nada" "todo" unTpGrupal)
         )
-
 
 
     ] -- TODO: Agregar Pruebas
