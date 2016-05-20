@@ -254,7 +254,45 @@ tablasDePrueba =
                 ["nada", "todo", show unTpGrupal]
                 unTpGrupal
                 (buscarYReemplazarPalabra "nada" "todo" unTpGrupal)
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevision (1 de 2)"
+                ["[(agregarLinea \" listaLarga = (>999) . length \" 2), (quitarLinea 3), (quitarLinea 3), (quitarLinea 3)]", show unTpGrupal]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>999) . length \n")
+                (
+                    aplicarRevision 
+                        [
+                            (agregarLinea " listaLarga = (>999) . length " 2), 
+                            (quitarLinea 3), 
+                            (quitarLinea 3), 
+                            (quitarLinea 3)
+                        ] 
+                        unTpGrupal
+                )
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevision (2 de 2)"
+                [
+                    "[(agregarLinea \" listaLarga = (>999) . length \" 2), wrappearArchivo, (reemplazarLinea 3 \"\n\"),(quitarLinea 4), (agregarLinea 3 \" print \"hola mundo\"\"), (quitarLinea 5)]", 
+                    show unTpGrupal
+                ]
+                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>999) . length \n print \"hola mundo\"\n\n")
+                (
+                    aplicarRevision 
+                        [
+                            (agregarLinea " listaLarga = (>999) . length " 2), 
+                            wrappearArchivo, 
+                            (reemplazarLinea 3 "\n"), 
+                            (quitarLinea 4),
+                            (agregarLinea " print \"hola mundo\"" 3),
+                            (quitarLinea 5)
+                        ] 
+                        unTpGrupal
+                )
         )
+
 
 
     ] -- TODO: Agregar Pruebas

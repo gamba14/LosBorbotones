@@ -12,7 +12,8 @@ module HIT
     reemplazarLinea,
     wrappearArchivo,
     esModificacionInutil,
-    buscarYReemplazarPalabra
+    buscarYReemplazarPalabra,
+    aplicarRevision
 )
 where
 
@@ -26,6 +27,9 @@ import StringsAux
 data Archivo = Archivo {nombre :: String , contenido :: String} deriving (Show, Eq)
 
 type Modificacion = Archivo -> Archivo
+
+type Revision = [Modificacion]
+
 
 unTpGrupal :: Archivo
 
@@ -164,3 +168,7 @@ buscarYReemplazarPalabra buscada porReemplazar archivo =
     Archivo (nombre archivo)
     (deslinear (map (buscarEnLineaYRemplazar buscada porReemplazar) (lineas (contenido archivo)) ))
 
+
+aplicarRevision :: Revision -> Archivo -> Archivo
+
+aplicarRevision revision archivo = foldl (\arch modificacion -> modificacion arch) archivo revision
