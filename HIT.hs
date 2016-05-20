@@ -14,7 +14,9 @@ module HIT
     wrappearArchivo,
     esModificacionInutil,
     buscarYReemplazarPalabra,
-    aplicarRevision
+    aplicarRevision,
+    buscarRevision,
+    aplicarRevisionDirectorio
 )
 where
 
@@ -179,3 +181,14 @@ buscarYReemplazarPalabra buscada porReemplazar archivo =
 aplicarRevision :: Revision -> Archivo -> Archivo
 
 aplicarRevision revision archivo = foldl (\arch modificacion -> modificacion arch) archivo revision
+
+
+-- Busca las revisiones para un archivo en una revision de directorio
+buscarRevision :: RevisionDirectorio -> Archivo -> Revision
+
+buscarRevision revisionD archivo = foldl (++) [] (map revision (filter (\x -> (nombreArchivo x) == (nombre archivo)) revisionD))
+
+
+aplicarRevisionDirectorio :: RevisionDirectorio -> Directorio -> Directorio
+
+aplicarRevisionDirectorio revisionD directorio = map (\ archivo -> aplicarRevision (buscarRevision revisionD archivo) archivo) directorio
