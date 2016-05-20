@@ -203,27 +203,21 @@ tablasDePrueba =
             generarTest
                 "Prueba para wrappearArchivo (2 de 4)"
                 [show archivoPolemico]
-                (Archivo 
-                    "Este archivo no contiene nada que pueda ofender al lector.txt"
-                    ""
-                )
+                archivoPolemico
                 (wrappearArchivo archivoPolemico)
         ),
         (
             generarTest
                 "Prueba para wrappearArchivo (3 de 4)"
                 [show apuntesDeLamateria]
-                (Archivo 
-                    "Apuntes de la materia.txt" 
-                    "Declarar el tipo de una funcion\n\tf :: tipo_del_parametro_1 ->  tipo_del_parametro_2 ->  tipo_de_la_imagen_de_f\n..."
-                )
+                apuntesDeLamateria
                 (wrappearArchivo apuntesDeLamateria)
         ),
         (
             generarTest
                 "Prueba para wrappearArchivo (4 de 4)"
                 [show unTpGrupal]
-                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola ")
+                unTpGrupal
                 (wrappearArchivo unTpGrupal)
         )
 
