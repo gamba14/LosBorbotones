@@ -1,6 +1,7 @@
 module HIT
 (
     Archivo(..),
+    RevisionArchivo(..),
     tamanioArchivo,
     esVacio,
     cantLineas,
@@ -26,9 +27,15 @@ import StringsAux
 
 data Archivo = Archivo {nombre :: String , contenido :: String} deriving (Show, Eq)
 
+type Directorio = [Archivo]
+
 type Modificacion = Archivo -> Archivo
 
 type Revision = [Modificacion]
+
+data RevisionArchivo = RevisionArchivo {nombreArchivo :: String, revision :: Revision}
+
+type RevisionDirectorio = [RevisionArchivo]
 
 
 unTpGrupal :: Archivo
