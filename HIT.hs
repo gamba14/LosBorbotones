@@ -162,5 +162,5 @@ buscarYReemplazarPalabra :: String -> String -> Archivo -> Archivo
 
 buscarYReemplazarPalabra buscada porReemplazar archivo = 
     Archivo (nombre archivo)
-    (unlines (map (buscarEnLineaYRemplazar buscada porReemplazar) (lines (contenido archivo)) ))
+    (deslinear (map (buscarEnLineaYRemplazar buscada porReemplazar) (lineas (contenido archivo)) ))
 
