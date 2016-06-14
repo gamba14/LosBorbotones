@@ -192,3 +192,18 @@ buscarRevision revisionD archivo = foldl (++) [] (map revision (filter (\x -> (n
 aplicarRevisionDirectorio :: RevisionDirectorio -> Directorio -> Directorio
 
 aplicarRevisionDirectorio revisionD directorio = map (\ archivo -> aplicarRevision (buscarRevision revisionD archivo) archivo) directorio
+
+
+cualEsMasGrande :: Directorio -> RevisionDirectorio -> String 
+
+cualEsMasGrande directorio revisionDirectorio = nombre (snd (maximum (map (\archivo -> (tamanioArchivo archivo,archivo)) directorio)))
+
+
+
+
+
+
+
+
+
+
