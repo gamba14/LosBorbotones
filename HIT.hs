@@ -16,13 +16,15 @@ module HIT
     buscarYReemplazarPalabra,
     aplicarRevision,
     buscarRevision,
-    aplicarRevisionDirectorio
+    aplicarRevisionDirectorio,
+    cualEsMasGrande
 )
 where
 
 import Data.List
 import Data.Char
 import Data.String
+import Data.Ord
 
 import StringsAux
 
@@ -196,14 +198,15 @@ aplicarRevisionDirectorio revisionD directorio = map (\ archivo -> aplicarRevisi
 
 cualEsMasGrande :: Directorio -> RevisionDirectorio -> String 
 
-cualEsMasGrande directorio revisionDirectorio = nombre (snd (maximum (map (\archivo -> (tamanioArchivo archivo,archivo)) directorio)))
+-- Si el directorio esta vacio, interpretar como ninguno (?)
+cualEsMasGrande [] _ = ""
 
-
-
-
-
-
-
+cualEsMasGrande directorio revisionDirectorio = 
+    nombre(
+        maximumBy 
+            (\a b -> comparing tamanioArchivo a b) 
+            (aplicarRevisionDirectorio revisionDirectorio directorio)
+    )
 
 
 
