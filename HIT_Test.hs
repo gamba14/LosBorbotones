@@ -2,6 +2,8 @@ import HIT
 import Tester
 
 
+-- Archivos
+
 unTpGrupal = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n    \n hola " 
 
 apuntesDeLamateria = 
@@ -17,6 +19,53 @@ archivoPolemico =
 lineasLargas = Archivo 
                 "lineasLargas.txt" 
                 "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\n12345678901234567890" 
+
+-- Revision para tp grupal A
+revisionTpGrupalA =  
+    [
+        (agregarLinea " listaLarga = (>999) . length " 2), 
+        (quitarLinea 3), 
+        (quitarLinea 3), 
+        (quitarLinea 3)
+    ] 
+
+-- Como no se pueden mostar las funciones uso un String como workarrond
+showRevisionTpGrupalA = 
+    "["                                                         ++
+        "(agregarLinea \" listaLarga = (>999) . length \" 2),"  ++
+        "(quitarLinea 3), "                                     ++
+        "(quitarLinea 3), "                                     ++
+        "(quitarLinea 3) "                                      ++
+    "]"
+
+-- unTpGrupal depues de aplicar la revicion A
+unTpGrupalrA = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>999) . length \n"
+
+
+-- Revision para tp grupal B
+revisionTpGrupalB = 
+    [
+        (agregarLinea " listaLarga = (>999) . length " 2), 
+        wrappearArchivo, 
+        (reemplazarLinea 3 "\n"), 
+        (quitarLinea 4),
+        (agregarLinea " print \"hola mundo\"" 3),
+        (quitarLinea 5)
+    ]
+
+-- Como no se pueden mostar las funciones uso un String como workarrond
+showRevisionTpGrupalB = 
+    "["                                                         ++ 
+        "(agregarLinea \" listaLarga = (>999) . length \" 2), " ++
+        " wrappearArchivo, "                                    ++ 
+        "(reemplazarLinea 3 \"\n\"), "                          ++
+        "(quitarLinea 4), "                                     ++
+        "(agregarLinea 3 \" print \"hola mundo\"\"), "          ++ 
+        "(quitarLinea 5)"                                       ++ 
+    "]" 
+                  
+-- unTpGrupal depues de aplicar la revicion B
+unTpGrupalrB = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>999) . length \n print \"hola mundo\"\n\n"
 
 -- Tabla de pruebas (test)
 tablasDePrueba = 
@@ -258,39 +307,23 @@ tablasDePrueba =
         (
             generarTest
                 "Prueba para aplicarRevision (1 de 2)"
-                ["[(agregarLinea \" listaLarga = (>999) . length \" 2), (quitarLinea 3), (quitarLinea 3), (quitarLinea 3)]", show unTpGrupal]
-                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>999) . length \n")
-                (
-                    aplicarRevision 
-                        [
-                            (agregarLinea " listaLarga = (>999) . length " 2), 
-                            (quitarLinea 3), 
-                            (quitarLinea 3), 
-                            (quitarLinea 3)
-                        ] 
-                        unTpGrupal
-                )
+                [
+                    showRevisionTpGrupalA, 
+                    show unTpGrupal
+                ]
+                unTpGrupalrA
+                (aplicarRevision revisionTpGrupalA unTpGrupal)
         ),
         (
             generarTest
                 "Prueba para aplicarRevision (2 de 2)"
                 [
-                    "[(agregarLinea \" listaLarga = (>999) . length \" 2), wrappearArchivo, (reemplazarLinea 3 \"\n\"),(quitarLinea 4), (agregarLinea 3 \" print \"hola mundo\"\"), (quitarLinea 5)]", 
+                    showRevisionTpGrupalB,
                     show unTpGrupal
                 ]
-                (Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>999) . length \n print \"hola mundo\"\n\n")
-                (
-                    aplicarRevision 
-                        [
-                            (agregarLinea " listaLarga = (>999) . length " 2), 
-                            wrappearArchivo, 
-                            (reemplazarLinea 3 "\n"), 
-                            (quitarLinea 4),
-                            (agregarLinea " print \"hola mundo\"" 3),
-                            (quitarLinea 5)
-                        ] 
-                        unTpGrupal
-                )
+                unTpGrupalrB
+                ( aplicarRevision revisionTpGrupalB unTpGrupal )
+        ),
         )
 
 
