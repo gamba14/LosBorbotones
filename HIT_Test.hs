@@ -67,6 +67,15 @@ showRevisionTpGrupalB =
 -- unTpGrupal depues de aplicar la revicion B
 unTpGrupalrB = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>999) . length \n print \"hola mundo\"\n\n"
 
+
+-- Directorio
+directorioDePruebas = [ unTpGrupal, apuntesDeLamateria, archivoPolemico, lineasLargas]
+
+revisionDirectorioA = [ RevisionArchivo "tpGrupal.hs" revisionTpGrupalA]
+
+directorioDePruebasRA = [ unTpGrupalrA, apuntesDeLamateria, archivoPolemico, lineasLargas ]
+
+
 -- Tabla de pruebas (test)
 tablasDePrueba = 
     [ 
@@ -324,10 +333,56 @@ tablasDePrueba =
                 unTpGrupalrB
                 ( aplicarRevision revisionTpGrupalB unTpGrupal )
         ),
+        (
+            generarTest
+                "Prueba para aplicarRevisionDirectorio (1 de ?)"
+                [
+                    "[]", -- fiaca para poner lo que va 
+                    show directorioDePruebas
+                ]
+                directorioDePruebas
+                ( aplicarRevisionDirectorio [] directorioDePruebas )
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevisionDirectorio (2 de ?)"
+                [
+                    "revisionDirectorioA", -- fiaca para poner lo que va 
+                    show directorioDePruebas
+                ]
+                directorioDePruebasRA
+                ( aplicarRevisionDirectorio revisionDirectorioA directorioDePruebas )
+        ),
+        (
+            generarTest
+                "Prueba para cualEsMasGrande (1 de ?)"
+                [
+                    show directorioDePruebas,
+                    "[]" -- fiaca para poner lo que va 
+                ]
+                ""
+                (cualEsMasGrande [] revisionDirectorioA)
+        ),
+        (
+            generarTest
+                "Prueba para cualEsMasGrande (2 de ?)"
+                [
+                    show directorioDePruebas,
+                    "revisionDirectorioA" -- fiaca para poner lo que va 
+                ]
+                (nombre apuntesDeLamateria)
+                (cualEsMasGrande directorioDePruebas [])
+        ),
+        (
+            generarTest
+                "Prueba para cualEsMasGrande (3 de ?)"
+                [
+                    show directorioDePruebas,
+                    "revisionDirectorioA" -- fiaca para poner lo que va 
+                ]
+                (nombre apuntesDeLamateria)
+                (cualEsMasGrande directorioDePruebas revisionDirectorioA)
         )
-
-
-
     ] -- TODO: Agregar Pruebas
 
 ejecutarPruebas = correrLasSiguientesPruebas tablasDePrueba 
