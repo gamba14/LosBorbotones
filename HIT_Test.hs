@@ -360,7 +360,7 @@ tablasDePrueba =
                     show directorioDePruebas,
                     "[]" -- fiaca para poner lo que va 
                 ]
-                ""
+                Nothing
                 (cualEsMasGrande [] revisionDirectorioA)
         ),
         (
@@ -370,7 +370,7 @@ tablasDePrueba =
                     show directorioDePruebas,
                     "revisionDirectorioA" -- fiaca para poner lo que va 
                 ]
-                (nombre apuntesDeLamateria)
+                (Just apuntesDeLamateria)
                 (cualEsMasGrande directorioDePruebas [])
         ),
         (
@@ -380,7 +380,7 @@ tablasDePrueba =
                     show directorioDePruebas,
                     "revisionDirectorioA" -- fiaca para poner lo que va 
                 ]
-                (nombre apuntesDeLamateria)
+                (Just apuntesDeLamateria)
                 (cualEsMasGrande directorioDePruebas revisionDirectorioA)
         )
     ] -- TODO: Agregar Pruebas

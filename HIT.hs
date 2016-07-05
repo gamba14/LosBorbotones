@@ -196,13 +196,13 @@ aplicarRevisionDirectorio :: RevisionDirectorio -> Directorio -> Directorio
 aplicarRevisionDirectorio revisionD directorio = map (\ archivo -> aplicarRevision (buscarRevision revisionD archivo) archivo) directorio
 
 
-cualEsMasGrande :: Directorio -> RevisionDirectorio -> String 
+cualEsMasGrande :: Directorio -> RevisionDirectorio -> Maybe Archivo 
 
 -- Si el directorio esta vacio, interpretar como ninguno (?)
-cualEsMasGrande [] _ = ""
+cualEsMasGrande [] _ = Nothing
 
 cualEsMasGrande directorio revisionDirectorio = 
-    nombre(
+    Just (
         maximumBy 
             (\a b -> comparing tamanioArchivo a b) 
             (aplicarRevisionDirectorio revisionDirectorio directorio)
