@@ -188,7 +188,7 @@ aplicarRevision revision archivo = foldl (\arch modificacion -> modificacion arc
 -- Busca las revisiones para un archivo en una revision de directorio
 buscarRevision :: RevisionDirectorio -> Archivo -> Revision
 
-buscarRevision revisionD archivo = foldl (++) [] (map revision (filter (\x -> (nombreArchivo x) == (nombre archivo)) revisionD))
+buscarRevision revisionD (Archivo nombre contenido) = foldl (++) [] (map revision (filter (\x -> (nombreArchivo x) == nombre) revisionD))
 
 
 aplicarRevisionDirectorio :: RevisionDirectorio -> Directorio -> Directorio
