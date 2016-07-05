@@ -16,9 +16,10 @@ archivoPolemico =
         "Este archivo no contiene nada que pueda ofender al lector.txt"
         ""
 
-lineasLargas = Archivo 
-                "lineasLargas.txt" 
-                "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\n12345678901234567890" 
+lineasLargas = 
+    Archivo 
+        "lineasLargas.txt" 
+        "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\n12345678901234567890" 
 
 -- Revision para tp grupal A
 revisionTpGrupalA =  
