@@ -60,12 +60,12 @@ tamanioArchivo archivo = length (contenido archivo) * 8
 
 esVacio :: Archivo -> Bool
 
-esVacio archivo = length (contenido archivo) == 0
+esVacio archivo = (tamanioArchivo archivo) == 0
 
 
 cantLineas :: Archivo -> Int
 
-cantLineas archivo = length (lines (contenido archivo))
+cantLineas (Archivo _ contenido) = length (lines contenido)
 
 
 esLineaEnBlanco :: String -> Bool
@@ -75,27 +75,28 @@ esLineaEnBlanco linea = all isSpace linea
 
 algunaLineaEnBlanco :: Archivo -> Bool
 
-algunaLineaEnBlanco archivo = any esLineaEnBlanco (lines (contenido archivo))
+algunaLineaEnBlanco (Archivo nombre contenido) = any esLineaEnBlanco (lines contenido)
 
 
 esHs :: Archivo -> Bool
 
-esHs archivo = drop (length (nombre archivo) - 3) (nombre archivo) == ".hs"
+esHs (Archivo nombre _) = drop (length nombre - 3) nombre == ".hs"
 
 
 renombrarArchivo ::  String -> Archivo -> Archivo
 
-renombrarArchivo nuevoNombre archivo = Archivo nuevoNombre (contenido archivo) 
+renombrarArchivo nuevoNombre (Archivo _ contenido) = Archivo nuevoNombre contenido 
+
 
 -- Agregar linea (texto) desde de (n) en (archivo)
 agregarLinea :: String -> Int -> Archivo -> Archivo
 
-agregarLinea linea posicion archivo =
+agregarLinea linea posicion (Archivo nombre contenido) =
     Archivo 
-    (nombre archivo) 
+    nombre
     (
-        let anterior  =  lineaAnterior   posicion      (contenido archivo)
-            posterior =  lineaPosterior (posicion - 1) (contenido archivo) 
+        let anterior  =  lineaAnterior   posicion      contenido
+            posterior =  lineaPosterior (posicion - 1) contenido
 
         in case anterior of 
             []       ->                           (lineaSegura linea) ++ posterior
@@ -105,24 +106,24 @@ agregarLinea linea posicion archivo =
 -- Quitar linea (n) en Archivo
 quitarLinea :: Int -> Archivo -> Archivo
 
-quitarLinea posicion archivo = 
+quitarLinea posicion (Archivo nombre contenido) = 
     Archivo 
-    (nombre archivo) 
+    nombre
     (
-        let anterior  =  lineaAnterior  posicion (contenido archivo) 
-            posterior =  lineaPosterior posicion (contenido archivo)
+        let anterior  =  lineaAnterior  posicion contenido 
+            posterior =  lineaPosterior posicion contenido
         in anterior ++ posterior
     )
 
 -- Reemplazar linea (n) por (texto) en (archivo)
 reemplazarLinea :: Int -> String -> Archivo -> Archivo
 
-reemplazarLinea posicion nuevalinea archivo =  
+reemplazarLinea posicion nuevalinea (Archivo nombre contenido) =  
     Archivo 
-    (nombre archivo) 
+    nombre
     (
-        let anterior  =  lineaAnterior  posicion (contenido archivo) 
-            posterior =  lineaPosterior posicion (contenido archivo)
+        let anterior  =  lineaAnterior  posicion contenido
+            posterior =  lineaPosterior posicion contenido
 
         in case anterior of 
             []       ->                           (lineaSegura nuevalinea) ++ posterior
@@ -150,22 +151,24 @@ wrappearLinea linea = wrappearLineaAux "" linea
     
 wrappearArchivo :: Archivo -> Archivo
 
-wrappearArchivo archivo = 
+wrappearArchivo (Archivo nombre contenido) = 
     Archivo
-    (nombre archivo)
-    (deslinear (map wrappearLinea (lineas (contenido archivo))))
+    nombre
+    (deslinear (map wrappearLinea (lineas contenido)))
         
 
 esModificacionInutil :: Modificacion -> Archivo -> Bool
 
-esModificacionInutil modificacion archivo = archivoModificado == archivo
+esModificacionInutil modificacion archivo = 
+    archivoModificado == archivo
     where archivoModificado = modificacion archivo
 
 
 reemplazarSiCoincide :: String -> String -> String -> String
 
-reemplazarSiCoincide buscada porReemplazar palabra | buscada == palabra = porReemplazar
-                                                   | otherwise = palabra
+reemplazarSiCoincide buscada porReemplazar palabra 
+    | buscada == palabra = porReemplazar
+    | otherwise = palabra
 
 
 buscarEnLineaYRemplazar :: String -> String -> String -> String
@@ -198,7 +201,7 @@ aplicarRevisionDirectorio revisionD directorio = map (\ archivo -> aplicarRevisi
 
 cualEsMasGrande :: Directorio -> RevisionDirectorio -> Maybe Archivo 
 
--- Si el directorio esta vacio, interpretar como ninguno (?)
+-- Si el directorio esta vacio, interpretar como ninguno
 cualEsMasGrande [] _ = Nothing
 
 cualEsMasGrande directorio revisionDirectorio = 
