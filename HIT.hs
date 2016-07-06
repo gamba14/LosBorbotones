@@ -195,9 +195,13 @@ buscarRevision :: RevisionDirectorio -> Archivo -> Revision
 buscarRevision revisionD (Archivo nombre contenido) = foldl (++) [] (map revision (filter (\x -> (nombreArchivo x) == nombre) revisionD))
 
 
+aplicarRevisionD :: RevisionDirectorio -> Archivo -> Archivo
+
+aplicarRevisionD revisionD archivo = aplicarRevision (buscarRevision revisionD archivo) archivo
+
 aplicarRevisionDirectorio :: RevisionDirectorio -> Directorio -> Directorio
 
-aplicarRevisionDirectorio revisionD directorio = map (\ archivo -> aplicarRevision (buscarRevision revisionD archivo) archivo) directorio
+aplicarRevisionDirectorio revisionD directorio = map (\archivo -> aplicarRevisionD revisionD archivo) directorio
 
 
 cualEsMasGrande :: Directorio -> RevisionDirectorio -> Maybe Archivo 
