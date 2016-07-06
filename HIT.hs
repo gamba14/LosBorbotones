@@ -247,3 +247,4 @@ cualDiffiereMasEnTamanio directorio revisionD =
         enTuplar  = (\ archivo -> (archivo, (revision archivo)))
         diff      = (uncurry diferenciaTamanioOrigRev).enTuplar
 
+-- TODO: falta el ultimo punto
