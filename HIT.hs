@@ -17,7 +17,8 @@ module HIT
     aplicarRevision,
     buscarRevision,
     aplicarRevisionDirectorio,
-    cualEsMasGrande
+    cualEsMasGrande,
+    cualDiffiereMasEnTamanio
 )
 where
 
@@ -218,4 +219,30 @@ cualEsMasGrande directorio revisionDirectorio =
     )
 
 
+-- Devuelve la diferencia de tamanio entre un archivo y el mismo archivo despues de aplicar una revision 
+diferenciaTamanioOrigRev :: Archivo -> Revision -> Int
+
+diferenciaTamanioOrigRev archivo revision = 
+    (tamanioArchivo (aplicarRevision revision archivo)) - (tamanioArchivo archivo)
+
+
+
+cualDiffiereMasEnTamanio :: Directorio -> RevisionDirectorio -> Maybe Archivo
+
+cualDiffiereMasEnTamanio [] _ = Nothing
+
+cualDiffiereMasEnTamanio directorio revisionD =
+    Just 
+    (
+        aplicarRevisionD revisionD 
+        (   
+            maximumBy 
+                (\a b -> comparing diff a b)
+                directorio
+        )
+    )
+    where   
+        revision  = buscarRevision revisionD
+        enTuplar  = (\ archivo -> (archivo, (revision archivo)))
+        diff      = (uncurry diferenciaTamanioOrigRev).enTuplar
 

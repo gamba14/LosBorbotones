@@ -453,6 +453,26 @@ tablasDePrueba =
                 ]
                 (Just lineasLargasrC)
                 (cualEsMasGrande directorioDePruebas revisionDirectorioC)
+        ),
+        (
+            generarTest
+                "Prueba para cualDiffiereMasEnTamanio (1 de ?)"
+                [
+                    "[]",
+                    "revisionDirectorioA" -- fiaca para poner lo que va 
+                ]
+                Nothing
+                (cualDiffiereMasEnTamanio [] revisionDirectorioA)
+        ),
+        (
+            generarTest
+                "Prueba para cualDiffiereMasEnTamanio (2 de ?)"
+                [
+                    show directorioDePruebas,
+                    "revisionDirectorioC" -- fiaca para poner lo que va 
+                ]
+                (Just lineasLargasrC)
+                (cualDiffiereMasEnTamanio directorioDePruebas revisionDirectorioC)
         )
     ] -- TODO: Agregar Pruebas
 
