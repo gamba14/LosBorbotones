@@ -69,12 +69,52 @@ showRevisionTpGrupalB =
 unTpGrupalrB = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>999) . length \n print \"hola mundo\"\n\n"
 
 
+-- Revision para tp lineas Largas
+revicionLineasLargas = 
+    [
+        (
+            agregarLinea 
+                "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890" 
+                5 
+        )
+    ]
+
+-- Como no se pueden mostar las funciones uso un String como workarrond
+showRevicionLineasLargas =
+    "[" ++
+        "(" ++
+            "agregarLinea" ++
+                "\"123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\"" ++
+                "5" ++
+        ")" ++
+    "]"
+
+lineasLargasrC = 
+    Archivo 
+        "lineasLargas.txt" 
+        ( 
+          "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\n" ++ 
+          "12345678901234567890\n" ++
+          "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\n" 
+        )
+
+
 -- Directorio
 directorioDePruebas = [ unTpGrupal, apuntesDeLamateria, archivoPolemico, lineasLargas]
 
+
 revisionDirectorioA = [ RevisionArchivo "tpGrupal.hs" revisionTpGrupalA]
 
+revisionDirectorioB = [ RevisionArchivo "tpGrupal.hs" revisionTpGrupalB]
+
+revisionDirectorioC = [ RevisionArchivo "lineasLargas.txt" revicionLineasLargas]
+
+
 directorioDePruebasRA = [ unTpGrupalrA, apuntesDeLamateria, archivoPolemico, lineasLargas ]
+
+directorioDePruebasRB = [ unTpGrupalrB, apuntesDeLamateria, archivoPolemico, lineasLargas ]
+
+directorioDePruebasRC = [ unTpGrupal, apuntesDeLamateria, archivoPolemico, lineasLargasrC]
 
 
 -- Tabla de pruebas (test)
@@ -336,9 +376,19 @@ tablasDePrueba =
         ),
         (
             generarTest
-                "Prueba para aplicarRevisionDirectorio (1 de ?)"
+                "Prueba para aplicarRevisionDirectorio (1 de 4)"
                 [
-                    "[]", -- fiaca para poner lo que va 
+                    "[]",
+                    "[]"
+                ]
+                []
+                ( aplicarRevisionDirectorio [] [] )
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevisionDirectorio (2 de 4)"
+                [
+                    "[]",
                     show directorioDePruebas
                 ]
                 directorioDePruebas
@@ -346,7 +396,7 @@ tablasDePrueba =
         ),
         (
             generarTest
-                "Prueba para aplicarRevisionDirectorio (2 de ?)"
+                "Prueba para aplicarRevisionDirectorio (3 de 4)"
                 [
                     "revisionDirectorioA", -- fiaca para poner lo que va 
                     show directorioDePruebas
@@ -356,33 +406,53 @@ tablasDePrueba =
         ),
         (
             generarTest
-                "Prueba para cualEsMasGrande (1 de ?)"
+                "Prueba para aplicarRevisionDirectorio (4 de 4)"
                 [
-                    show directorioDePruebas,
-                    "[]" -- fiaca para poner lo que va 
+                    "revisionDirectorioC", -- fiaca para poner lo que va 
+                    show directorioDePruebas
+                ]
+                directorioDePruebasRC
+                ( aplicarRevisionDirectorio revisionDirectorioC directorioDePruebas )
+        ),
+        (
+            generarTest
+                "Prueba para cualEsMasGrande (1 de 1)"
+                [
+                    "[]",
+                    "revisionDirectorioA" -- fiaca para poner lo que va 
                 ]
                 Nothing
                 (cualEsMasGrande [] revisionDirectorioA)
         ),
         (
             generarTest
-                "Prueba para cualEsMasGrande (2 de ?)"
+                "Prueba para cualEsMasGrande (2 de 2)"
                 [
                     show directorioDePruebas,
-                    "revisionDirectorioA" -- fiaca para poner lo que va 
+                    "[]"
                 ]
                 (Just apuntesDeLamateria)
                 (cualEsMasGrande directorioDePruebas [])
         ),
         (
             generarTest
-                "Prueba para cualEsMasGrande (3 de ?)"
+                "Prueba para cualEsMasGrande (3 de 3)"
                 [
                     show directorioDePruebas,
                     "revisionDirectorioA" -- fiaca para poner lo que va 
                 ]
                 (Just apuntesDeLamateria)
                 (cualEsMasGrande directorioDePruebas revisionDirectorioA)
+        ),
+        (
+            generarTest
+                "Prueba para cualEsMasGrande (4 de 4)"
+                [
+                    show directorioDePruebas,
+                    "revisionDirectorioC" -- fiaca para poner lo que va 
+                ]
+                (Just lineasLargasrC)
+                (cualEsMasGrande directorioDePruebas revisionDirectorioC)
         )
     ] -- TODO: Agregar Pruebas
 
