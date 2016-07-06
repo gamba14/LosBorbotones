@@ -181,12 +181,7 @@ buscarYReemplazarPalabra :: String -> String -> Archivo -> Archivo
 buscarYReemplazarPalabra buscada porReemplazar (Archivo nombre contenido) = 
     Archivo 
         nombre
-        (deslinear (map (buscarEnLineaYRemplazar buscada porReemplazar) (lineas contenido))
-
-
-aplicarRevision :: Revision -> Archivo -> Archivo
-
-aplicarRevision revision archivo = foldl (\arch modificacion -> modificacion arch) archivo revision
+        (deslinear (map (buscarEnLineaYRemplazar buscada porReemplazar) (lineas contenido)))
 
 
 -- Busca las revisiones para un archivo en una revision de directorio
@@ -195,9 +190,15 @@ buscarRevision :: RevisionDirectorio -> Archivo -> Revision
 buscarRevision revisionD (Archivo nombre contenido) = foldl (++) [] (map revision (filter (\x -> (nombreArchivo x) == nombre) revisionD))
 
 
+aplicarRevision :: Revision -> Archivo -> Archivo
+
+aplicarRevision revision archivo = foldl (\arch modificacion -> modificacion arch) archivo revision
+
+
 aplicarRevisionD :: RevisionDirectorio -> Archivo -> Archivo
 
 aplicarRevisionD revisionD archivo = aplicarRevision (buscarRevision revisionD archivo) archivo
+
 
 aplicarRevisionDirectorio :: RevisionDirectorio -> Directorio -> Directorio
 
