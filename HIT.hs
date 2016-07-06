@@ -178,9 +178,10 @@ buscarEnLineaYRemplazar buscada porReemplazar linea = unirSimbolos(map (reemplaz
 
 buscarYReemplazarPalabra :: String -> String -> Archivo -> Archivo
 
-buscarYReemplazarPalabra buscada porReemplazar archivo = 
-    Archivo (nombre archivo)
-    (deslinear (map (buscarEnLineaYRemplazar buscada porReemplazar) (lineas (contenido archivo)) ))
+buscarYReemplazarPalabra buscada porReemplazar (Archivo nombre contenido) = 
+    Archivo 
+        nombre
+        (deslinear (map (buscarEnLineaYRemplazar buscada porReemplazar) (lineas contenido))
 
 
 aplicarRevision :: Revision -> Archivo -> Archivo
