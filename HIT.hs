@@ -212,7 +212,8 @@ cualEsMasGrande :: Directorio -> RevisionDirectorio -> Maybe Archivo
 cualEsMasGrande [] _ = Nothing
 
 cualEsMasGrande directorio revisionDirectorio = 
-    Just (
+    Just 
+    (
         maximumBy 
             (\a b -> comparing tamanioArchivo a b) 
             (aplicarRevisionDirectorio revisionDirectorio directorio)
