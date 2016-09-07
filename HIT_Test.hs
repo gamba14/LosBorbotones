@@ -458,7 +458,7 @@ tablasDePrueba =
         ),
         (
             generarTest
-                "Prueba para cualDiffiereMasEnTamanio (1 de ?)"
+                "Prueba para cualDiffiereMasEnTamanio (1 de 2)"
                 [
                     "[]",
                     "revisionDirectorioA" -- fiaca para poner lo que va 
@@ -468,7 +468,7 @@ tablasDePrueba =
         ),
         (
             generarTest
-                "Prueba para cualDiffiereMasEnTamanio (2 de ?)"
+                "Prueba para cualDiffiereMasEnTamanio (2 de 2)"
                 [
                     show directorioDePruebas,
                     "revisionDirectorioC" -- fiaca para poner lo que va 
@@ -481,7 +481,7 @@ tablasDePrueba =
                 "Prueba para aplicarRevisionesDeDirectorio (1 de 6)"
                 [
                     "[]",
-                    "[]" -- fiaca para poner lo que va 
+                    "[]" 
                 ]
                 ([])
                 (aplicarRevisionesDeDirectorio [] [])
@@ -501,7 +501,7 @@ tablasDePrueba =
                 "Prueba para aplicarRevisionesDeDirectorio (3 de 6)"
                 [
                     "directorioDePruebas",
-                    "[]" -- fiaca para poner lo que va 
+                    "[]"
                 ]
                 (directorioDePruebas)
                 (aplicarRevisionesDeDirectorio directorioDePruebas [])
