@@ -116,6 +116,8 @@ directorioDePruebasRB = [ unTpGrupalrB, apuntesDeLamateria, archivoPolemico, lin
 
 directorioDePruebasRC = [ unTpGrupal, apuntesDeLamateria, archivoPolemico, lineasLargasrC]
 
+directorioDePruebasRAC = [ unTpGrupalrA, apuntesDeLamateria, archivoPolemico, lineasLargasrC]
+
 
 -- Tabla de pruebas (test)
 tablasDePrueba = 
@@ -473,6 +475,66 @@ tablasDePrueba =
                 ]
                 (Just lineasLargasrC)
                 (cualDiffiereMasEnTamanio directorioDePruebas revisionDirectorioC)
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevisionesDeDirectorio (1 de 6)"
+                [
+                    "[]",
+                    "[]" -- fiaca para poner lo que va 
+                ]
+                ([])
+                (aplicarRevisionesDeDirectorio [] [])
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevisionesDeDirectorio (2 de 6)"
+                [
+                    "",
+                    "[revisionDirectorioC]" -- fiaca para poner lo que va 
+                ]
+                ([])
+                (aplicarRevisionesDeDirectorio [] [revisionDirectorioC])
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevisionesDeDirectorio (3 de 6)"
+                [
+                    "directorioDePruebas",
+                    "[]" -- fiaca para poner lo que va 
+                ]
+                (directorioDePruebas)
+                (aplicarRevisionesDeDirectorio directorioDePruebas [])
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevisionesDeDirectorio (4 de 6)"
+                [
+                    "directorioDePruebas",
+                    "[revisionDirectorioA]" -- fiaca para poner lo que va 
+                ]
+                (directorioDePruebasRA)
+                (aplicarRevisionesDeDirectorio directorioDePruebas [revisionDirectorioA])
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevisionesDeDirectorio (5 de 6)"
+                [
+                    "directorioDePruebas",
+                    "[revisionDirectorioC]" -- fiaca para poner lo que va 
+                ]
+                (directorioDePruebasRC)
+                (aplicarRevisionesDeDirectorio directorioDePruebas [revisionDirectorioC])
+        ),
+        (
+            generarTest
+                "Prueba para aplicarRevisionesDeDirectorio (6 de 6)"
+                [
+                    "directorioDePruebas",
+                    "[revisionDirectorioC, revisionDirectorioA]" -- fiaca para poner lo que va 
+                ]
+                (directorioDePruebasRAC)
+                (aplicarRevisionesDeDirectorio directorioDePruebas [revisionDirectorioC, revisionDirectorioA])
         )
     ] -- TODO: Agregar Pruebas
 

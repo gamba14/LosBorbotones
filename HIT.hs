@@ -18,7 +18,8 @@ module HIT
     buscarRevision,
     aplicarRevisionDirectorio,
     cualEsMasGrande,
-    cualDiffiereMasEnTamanio
+    cualDiffiereMasEnTamanio,
+    aplicarRevisionesDeDirectorio
 )
 where
 
@@ -247,4 +248,8 @@ cualDiffiereMasEnTamanio directorio revisionD =
         enTuplar  = (\ archivo -> (archivo, (revision archivo)))
         diff      = (uncurry diferenciaTamanioOrigRev).enTuplar
 
--- TODO: falta el ultimo punto
+-- Aplica una serie de reviciones de directorio a un directorio
+aplicarRevisionesDeDirectorio :: Directorio -> [RevisionDirectorio] -> Directorio
+
+aplicarRevisionesDeDirectorio directorio revisiones =
+    foldl (\direc revision -> aplicarRevisionDirectorio revision direc) directorio revisiones
